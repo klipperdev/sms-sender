@@ -1,7 +1,7 @@
 Klipper SMS Sender Component
 ============================
 
-The SMS Sender component is is a powerful system for creating and sending SMS. Like
+The SMS Sender component is a powerful system for creating and sending SMS. Like
 [Symfony Mailer](https://symfony.com/doc/current/mailer.html) for emails, this library
 use the [Symfony Mime](https://symfony.com/doc/current/components/mime.html) to build the
 messages. It uses the same logic to create and send the message via several transports.
