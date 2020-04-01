@@ -1,0 +1,39 @@
+{
+    "name": "klipper/sms-sender",
+    "type": "library",
+    "description": "SMS Sender component of Klipper",
+    "keywords": ["SMS"],
+    "homepage": "https://github.com/klipperdev/sms-sender",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "François Pluchino",
+            "email": "francois.pluchino@klipper.dev"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.4.0",
+        "giggsey/libphonenumber-for-php": "^8.3.0",
+        "psr/log": "^1.0.0",
+        "symfony/event-dispatcher": "^4.3.0",
+        "symfony/http-client-contracts": "^1.1.0",
+        "symfony/mime": "^4.3.0,<4.4.0"
+    },
+    "require-dev": {
+        "symfony/http-client": "^4.3.0",
+        "symfony/messenger": "^4.3.0"
+    },
+    "autoload": {
+        "psr-4": { "Klipper\\Component\\SmsSender\\": "" },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0-dev"
+        }
+    }
+}
