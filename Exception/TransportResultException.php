@@ -40,8 +40,6 @@ class TransportResultException extends RuntimeException implements TransportExce
 
     /**
      * Get the transport result.
-     *
-     * @return Result
      */
     public function getResult(): Result
     {
@@ -52,8 +50,6 @@ class TransportResultException extends RuntimeException implements TransportExce
      * Build the exception message.
      *
      * @param Result $result The transport result
-     *
-     * @return string
      */
     private function buildMessage(Result $result): string
     {

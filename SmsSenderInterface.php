@@ -33,8 +33,6 @@ interface SmsSenderInterface
 
     /**
      * Check if the transport has a required from phone.
-     *
-     * @return bool
      */
     public function hasRequiredFrom(): bool;
 }

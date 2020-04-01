@@ -45,8 +45,6 @@ class Result
 
     /**
      * Get the class name of the transport.
-     *
-     * @return string
      */
     public function getTransportClassName(): string
     {
@@ -79,8 +77,6 @@ class Result
 
     /**
      * Check if the result has errors.
-     *
-     * @return bool
      */
     public function hasErrors(): bool
     {

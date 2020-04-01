@@ -44,8 +44,6 @@ abstract class AbstractResultItem
 
     /**
      * Get the recipient.
-     *
-     * @return Phone
      */
     public function getRecipient(): Phone
     {
@@ -54,8 +52,6 @@ abstract class AbstractResultItem
 
     /**
      * Get the data.
-     *
-     * @return array
      */
     public function getData(): array
     {

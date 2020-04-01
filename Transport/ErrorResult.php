@@ -60,8 +60,6 @@ class ErrorResult extends AbstractResultItem
 
     /**
      * Get the error message.
-     *
-     * @return string
      */
     public function getMessage(): string
     {
@@ -70,8 +68,6 @@ class ErrorResult extends AbstractResultItem
 
     /**
      * Get the error data.
-     *
-     * @return string
      */
     public function getCode(): string
     {
@@ -80,8 +76,6 @@ class ErrorResult extends AbstractResultItem
 
     /**
      * Get the exception.
-     *
-     * @return null|\Exception
      */
     public function getException(): ?\Exception
     {

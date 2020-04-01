@@ -44,8 +44,6 @@ abstract class AbstractMessageEvent extends Event
 
     /**
      * Get the message.
-     *
-     * @return RawMessage
      */
     public function getMessage(): RawMessage
     {
@@ -64,8 +62,6 @@ abstract class AbstractMessageEvent extends Event
 
     /**
      * Get the envelope.
-     *
-     * @return SmsEnvelope
      */
     public function getEnvelope(): SmsEnvelope
     {

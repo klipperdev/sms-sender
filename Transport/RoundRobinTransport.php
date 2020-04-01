@@ -103,8 +103,6 @@ class RoundRobinTransport implements TransportInterface
 
     /**
      * Get the name symbol.
-     *
-     * @return string
      */
     protected function getNameSymbol(): string
     {
@@ -113,8 +111,6 @@ class RoundRobinTransport implements TransportInterface
 
     /**
      * Rotates the transport list around and returns the first instance.
-     *
-     * @return null|TransportInterface
      */
     protected function getNextTransport(): ?TransportInterface
     {
@@ -148,8 +144,6 @@ class RoundRobinTransport implements TransportInterface
      * Check if the transport is dead.
      *
      * @param TransportInterface $transport The transport
-     *
-     * @return bool
      */
     protected function isTransportDead(TransportInterface $transport): bool
     {
@@ -160,8 +154,6 @@ class RoundRobinTransport implements TransportInterface
      * Move the cursor on the next transport, or the first transport if all transports are tested.
      *
      * @param int $cursor The cursor position
-     *
-     * @return int
      */
     private function moveCursor(int $cursor): int
     {

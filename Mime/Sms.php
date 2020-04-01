@@ -37,8 +37,6 @@ class Sms extends Message
 
     /**
      * Get the from phone.
-     *
-     * @return null|Phone
      */
     public function getFrom(): ?Phone
     {
@@ -95,8 +93,6 @@ class Sms extends Message
 
     /**
      * Get the text.
-     *
-     * @return null|string
      */
     public function getText(): ?string
     {
@@ -191,8 +187,6 @@ class Sms extends Message
      * Get the phone form the header.
      *
      * @param string $name The header name
-     *
-     * @return null|Phone
      */
     private function getPhoneFromListHeader(string $name): ?Phone
     {

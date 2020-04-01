@@ -48,8 +48,6 @@ class UnsupportedHostException extends LogicException
      *
      * @param string $host The host
      * @param array  $map  The map
-     *
-     * @return string
      */
     public static function buildMessage(string $host, array $map): string
     {

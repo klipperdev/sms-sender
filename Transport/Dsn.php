@@ -74,8 +74,6 @@ final class Dsn
      * Create a DSN instance from a string.
      *
      * @param string $dsn The string of dsn
-     *
-     * @return self
      */
     public static function fromString(string $dsn): self
     {
@@ -106,8 +104,6 @@ final class Dsn
 
     /**
      * Get the scheme.
-     *
-     * @return string
      */
     public function getScheme(): string
     {
@@ -116,8 +112,6 @@ final class Dsn
 
     /**
      * Get the host.
-     *
-     * @return string
      */
     public function getHost(): string
     {
@@ -126,8 +120,6 @@ final class Dsn
 
     /**
      * Get the user.
-     *
-     * @return null|string
      */
     public function getUser(): ?string
     {
@@ -136,8 +128,6 @@ final class Dsn
 
     /**
      * Get the password.
-     *
-     * @return null|string
      */
     public function getPassword(): ?string
     {
@@ -148,8 +138,6 @@ final class Dsn
      * Get the port.
      *
      * @param null|int $default The default value
-     *
-     * @return null|int
      */
     public function getPort(int $default = null): ?int
     {

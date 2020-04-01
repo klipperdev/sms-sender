@@ -43,9 +43,9 @@ final class TransportResultExceptionTest extends TestCase
             "\n",
             PHP_EOL,
             <<<'EOF'
-Unable to send an SMS for recipients:
-- +100: Error message (error_code)
-EOF
+                Unable to send an SMS for recipients:
+                - +100: Error message (error_code)
+                EOF
         );
 
         static::assertSame($expectedMessage, $ex->getMessage());

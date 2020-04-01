@@ -45,8 +45,6 @@ class SendSmsMessage
 
     /**
      * Get the message.
-     *
-     * @return RawMessage
      */
     public function getMessage(): RawMessage
     {
@@ -55,8 +53,6 @@ class SendSmsMessage
 
     /**
      * Get the envelope.
-     *
-     * @return null|SmsEnvelope
      */
     public function getEnvelope(): ?SmsEnvelope
     {

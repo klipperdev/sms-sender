@@ -25,8 +25,6 @@ class FailoverTransport extends RoundRobinTransport
 
     /**
      * Get the name symbol.
-     *
-     * @return string
      */
     protected function getNameSymbol(): string
     {

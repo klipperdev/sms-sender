@@ -159,9 +159,6 @@ final class RoundRobinTransportTest extends TestCase
 
     /**
      * @dataProvider getRequiredFromData
-     *
-     * @param bool $expectedValue
-     * @param bool $requiredFrom
      */
     public function testHasRequiredFrom(bool $expectedValue, bool $requiredFrom): void
     {
@@ -177,10 +174,6 @@ final class RoundRobinTransportTest extends TestCase
     }
 
     /**
-     * @param RoundRobinTransport $transport
-     * @param int                 $cursor
-     * @param array               $deadTransports
-     *
      * @throws
      */
     private function assertTransports(RoundRobinTransport $transport, int $cursor, array $deadTransports): void

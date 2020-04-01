@@ -59,8 +59,6 @@ class SentMessage
 
     /**
      * Get the message.
-     *
-     * @return RawMessage
      */
     public function getMessage(): RawMessage
     {
@@ -69,8 +67,6 @@ class SentMessage
 
     /**
      * Get the original message.
-     *
-     * @return RawMessage
      */
     public function getOriginalMessage(): RawMessage
     {
@@ -79,8 +75,6 @@ class SentMessage
 
     /**
      * Get the envelope.
-     *
-     * @return SmsEnvelope
      */
     public function getEnvelope(): SmsEnvelope
     {
@@ -89,8 +83,6 @@ class SentMessage
 
     /**
      * Convert the message into a string.
-     *
-     * @return string
      */
     public function toString(): string
     {
@@ -99,8 +91,6 @@ class SentMessage
 
     /**
      * Convert the message to iterable parts.
-     *
-     * @return iterable
      */
     public function toIterable(): iterable
     {
@@ -109,8 +99,6 @@ class SentMessage
 
     /**
      * Get the transport result.
-     *
-     * @return Result
      */
     public function getResult(): Result
     {

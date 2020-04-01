@@ -62,8 +62,6 @@ final class NullTransportFactoryTest extends TransportFactoryTestCase
 
     /**
      * @dataProvider incompleteDsnProvider
-     *
-     * @param Dsn $dsn
      */
     public function testIncompleteDsnException(Dsn $dsn): void
     {

@@ -73,8 +73,6 @@ class Phone extends Address
 
     /**
      * Get the phone.
-     *
-     * @return string
      */
     public function getPhone(): string
     {
@@ -83,8 +81,6 @@ class Phone extends Address
 
     /**
      * Convert the phone into a string.
-     *
-     * @return string
      */
     public function toString(): string
     {
@@ -95,8 +91,6 @@ class Phone extends Address
      * Get the encoded phone.
      *
      * @throws
-     *
-     * @return string
      */
     public function getEncodedPhone(): string
     {

@@ -66,8 +66,6 @@ abstract class AbstractTransport implements TransportInterface
     /**
      * Sets the maximum number of messages to send per second (0 to disable).
      *
-     * @param float $rate
-     *
      * @return static
      */
     public function setMaxPerSecond(float $rate): self
@@ -140,8 +138,6 @@ abstract class AbstractTransport implements TransportInterface
 
     /**
      * Get the logger.
-     *
-     * @return LoggerInterface
      */
     protected function getLogger(): LoggerInterface
     {

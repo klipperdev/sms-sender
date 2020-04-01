@@ -28,8 +28,6 @@ interface TransportFactoryInterface
      *
      * @throws UnsupportedSchemeException
      * @throws IncompleteDsnException
-     *
-     * @return TransportInterface
      */
     public function create(Dsn $dsn): TransportInterface;
 
@@ -37,8 +35,6 @@ interface TransportFactoryInterface
      * Check if the dsn is supported by the transport.
      *
      * @param Dsn $dsn The dsn instance
-     *
-     * @return bool
      */
     public function supports(Dsn $dsn): bool;
 }

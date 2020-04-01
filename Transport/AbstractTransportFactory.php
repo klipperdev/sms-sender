@@ -61,8 +61,6 @@ abstract class AbstractTransportFactory implements TransportFactoryInterface
      * @param Dsn $dsn The dsn instance
      *
      * @throws IncompleteDsnException When user is not set
-     *
-     * @return string
      */
     protected function getUser(Dsn $dsn): string
     {
@@ -79,8 +77,6 @@ abstract class AbstractTransportFactory implements TransportFactoryInterface
      * @param Dsn $dsn The dsn instance
      *
      * @throws IncompleteDsnException When password is not set
-     *
-     * @return string
      */
     protected function getPassword(Dsn $dsn): string
     {

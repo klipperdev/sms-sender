@@ -57,8 +57,6 @@ class Transport
      * @param null|EventDispatcherInterface $dispatcher The event dispatcher
      * @param null|HttpClientInterface      $client     The custom http client
      * @param null|LoggerInterface          $logger     The logger
-     *
-     * @return TransportInterface
      */
     public static function fromDsn(
         string $dsn,
@@ -75,8 +73,6 @@ class Transport
      * Create the transport from the dsn string.
      *
      * @param string $dsn The dsn
-     *
-     * @return TransportInterface
      */
     public function fromString(string $dsn): TransportInterface
     {
@@ -101,8 +97,6 @@ class Transport
      * Create the transport from the dsn instance.
      *
      * @param Dsn $dsn The dsn instance
-     *
-     * @return TransportInterface
      */
     public function fromDsnObject(Dsn $dsn): TransportInterface
     {
@@ -139,8 +133,6 @@ class Transport
      * @param null|EventDispatcherInterface $dispatcher The event dispatcher
      * @param null|HttpClientInterface      $client     The http client
      * @param null|LoggerInterface          $logger     The logger
-     *
-     * @return iterable
      */
     private static function getDefaultFactories(
         EventDispatcherInterface $dispatcher = null,

@@ -63,9 +63,6 @@ abstract class TransportFactoryTestCase extends TestCase
 
     /**
      * @dataProvider supportsProvider
-     *
-     * @param Dsn  $dsn
-     * @param bool $supports
      */
     public function testSupports(Dsn $dsn, bool $supports): void
     {
@@ -76,9 +73,6 @@ abstract class TransportFactoryTestCase extends TestCase
 
     /**
      * @dataProvider createProvider
-     *
-     * @param Dsn                $dsn
-     * @param TransportInterface $transport
      */
     public function testCreate(Dsn $dsn, TransportInterface $transport): void
     {
@@ -89,8 +83,6 @@ abstract class TransportFactoryTestCase extends TestCase
 
     /**
      * @dataProvider unsupportedSchemeProvider
-     *
-     * @param Dsn $dsn
      */
     public function testUnsupportedSchemeException(Dsn $dsn): void
     {
@@ -102,8 +94,6 @@ abstract class TransportFactoryTestCase extends TestCase
 
     /**
      * @dataProvider incompleteDsnProvider
-     *
-     * @param Dsn $dsn
      */
     public function testIncompleteDsnException(Dsn $dsn): void
     {

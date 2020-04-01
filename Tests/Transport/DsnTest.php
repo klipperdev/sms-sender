@@ -24,9 +24,6 @@ final class DsnTest extends TestCase
 {
     /**
      * @dataProvider fromStringProvider
-     *
-     * @param string $string
-     * @param Dsn    $dsn
      */
     public function testFromString(string $string, Dsn $dsn): void
     {
@@ -73,9 +70,6 @@ final class DsnTest extends TestCase
 
     /**
      * @dataProvider invalidDsnProvider
-     *
-     * @param string $dsn
-     * @param string $exceptionMessage
      */
     public function testInvalidDsn(string $dsn, string $exceptionMessage): void
     {

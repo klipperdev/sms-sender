@@ -25,8 +25,6 @@ interface TransportInterface
 {
     /**
      * Get the name.
-     *
-     * @return string
      */
     public function getName(): string;
 
@@ -37,15 +35,11 @@ interface TransportInterface
      * @param null|SmsEnvelope $envelope The envelope
      *
      * @throws TransportExceptionInterface
-     *
-     * @return null|SentMessage
      */
     public function send(RawMessage $message, SmsEnvelope $envelope = null): ?SentMessage;
 
     /**
      * Check if the from phone is required.
-     *
-     * @return bool
      */
     public function hasRequiredFrom(): bool;
 }

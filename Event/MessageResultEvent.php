@@ -41,8 +41,6 @@ class MessageResultEvent extends AbstractMessageEvent
 
     /**
      * Get the result.
-     *
-     * @return Result
      */
     public function getResult(): Result
     {
