@@ -11,8 +11,8 @@
 
 namespace Klipper\Component\SmsSender;
 
-use Klipper\Component\SmsSender\Bridge\Amazon\Transport\SnsTransportFactory;
-use Klipper\Component\SmsSender\Bridge\Twilio\Transport\TwilioTransportFactory;
+use Klipper\Bridge\SmsSender\Amazon\Transport\SnsTransportFactory;
+use Klipper\Bridge\SmsSender\Twilio\Transport\TwilioTransportFactory;
 use Klipper\Component\SmsSender\Exception\UnsupportedHostException;
 use Klipper\Component\SmsSender\Transport\Dsn;
 use Klipper\Component\SmsSender\Transport\FailoverTransport;
