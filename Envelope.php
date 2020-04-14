@@ -19,7 +19,7 @@ use Klipper\Component\SmsSender\Mime\Phone;
  *
  * @author François Pluchino <francois.pluchino@klipper.dev>
  */
-class SmsEnvelope
+class Envelope
 {
     /**
      * @var Phone

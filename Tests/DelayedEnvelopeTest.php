@@ -11,7 +11,7 @@
 
 namespace Klipper\Component\SmsSender\Tests;
 
-use Klipper\Component\SmsSender\DelayedSmsEnvelope;
+use Klipper\Component\SmsSender\DelayedEnvelope;
 use Klipper\Component\SmsSender\Exception\InvalidArgumentException;
 use Klipper\Component\SmsSender\Exception\LogicException;
 use Klipper\Component\SmsSender\Mime\Phone;
@@ -24,14 +24,14 @@ use Symfony\Component\Mime\RawMessage;
  *
  * @internal
  */
-final class DelayedSmsEnvelopeTest extends TestCase
+final class DelayedEnvelopeTest extends TestCase
 {
     public function testConstructorWithInvalidMessage(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('A delayed SMS envelope requires an instance of Symfony\Component\Mime\Message ("Symfony\Component\Mime\RawMessage" given).');
 
-        new DelayedSmsEnvelope(new RawMessage(''));
+        new DelayedEnvelope(new RawMessage(''));
     }
 
     public function testGetFromFromMessage(): void
@@ -39,7 +39,7 @@ final class DelayedSmsEnvelopeTest extends TestCase
         $message = new Sms();
         $message->from('+100');
 
-        $envelope = new DelayedSmsEnvelope($message);
+        $envelope = new DelayedEnvelope($message);
 
         static::assertNotNull($message->getFrom());
         static::assertSame($message->getFrom(), $envelope->getFrom());
@@ -51,7 +51,7 @@ final class DelayedSmsEnvelopeTest extends TestCase
         $this->expectExceptionMessage('Unable to determine the sender of the message.');
 
         $message = new Sms();
-        $envelope = new DelayedSmsEnvelope($message);
+        $envelope = new DelayedEnvelope($message);
 
         $envelope->getFrom();
     }
@@ -63,7 +63,7 @@ final class DelayedSmsEnvelopeTest extends TestCase
         $message = new Sms();
         $message->from('+100');
 
-        $envelope = new DelayedSmsEnvelope($message);
+        $envelope = new DelayedEnvelope($message);
         $envelope->setFrom($from);
 
         static::assertNotSame($message->getFrom(), $envelope->getFrom());
@@ -75,7 +75,7 @@ final class DelayedSmsEnvelopeTest extends TestCase
         $message = new Sms();
         $message->to('+100');
 
-        $envelope = new DelayedSmsEnvelope($message);
+        $envelope = new DelayedEnvelope($message);
 
         static::assertNotEmpty($message->getTo());
         static::assertNotEmpty($envelope->getRecipients());
@@ -90,7 +90,7 @@ final class DelayedSmsEnvelopeTest extends TestCase
         $message = new Sms();
         $message->to('+100');
 
-        $envelope = new DelayedSmsEnvelope($message);
+        $envelope = new DelayedEnvelope($message);
         $envelope->setRecipients($to);
 
         static::assertSame($to, $envelope->getRecipients());

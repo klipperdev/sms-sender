@@ -25,7 +25,7 @@ use Symfony\Component\Mime\RawMessage;
  *
  * @author François Pluchino <francois.pluchino@klipper.dev>
  */
-class DelayedSmsEnvelope extends SmsEnvelope
+class DelayedEnvelope extends Envelope
 {
     /**
      * @var bool

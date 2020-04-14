@@ -11,9 +11,9 @@
 
 namespace Klipper\Component\SmsSender\Transport;
 
+use Klipper\Component\SmsSender\Envelope;
 use Klipper\Component\SmsSender\Exception\TransportExceptionInterface;
 use Klipper\Component\SmsSender\SentMessage;
-use Klipper\Component\SmsSender\SmsEnvelope;
 use Symfony\Component\Mime\RawMessage;
 
 /**
@@ -31,12 +31,12 @@ interface TransportInterface
     /**
      * Send the message.
      *
-     * @param RawMessage       $message  The message
-     * @param null|SmsEnvelope $envelope The envelope
+     * @param RawMessage    $message  The message
+     * @param null|Envelope $envelope The envelope
      *
      * @throws TransportExceptionInterface
      */
-    public function send(RawMessage $message, SmsEnvelope $envelope = null): ?SentMessage;
+    public function send(RawMessage $message, Envelope $envelope = null): ?SentMessage;
 
     /**
      * Check if the from phone is required.

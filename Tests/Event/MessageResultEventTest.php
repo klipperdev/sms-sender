@@ -11,9 +11,9 @@
 
 namespace Klipper\Component\SmsSender\Tests\Event;
 
+use Klipper\Component\SmsSender\Envelope;
 use Klipper\Component\SmsSender\Event\MessageResultEvent;
 use Klipper\Component\SmsSender\Mime\Phone;
-use Klipper\Component\SmsSender\SmsEnvelope;
 use Klipper\Component\SmsSender\Transport\Result;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mime\RawMessage;
@@ -28,7 +28,7 @@ final class MessageResultEventTest extends TestCase
     public function testGettersAndSetters(): void
     {
         $message = new RawMessage('');
-        $envelope = new SmsEnvelope(new Phone('+100'), [new Phone('+2000')]);
+        $envelope = new Envelope(new Phone('+100'), [new Phone('+2000')]);
         $result = new Result(\stdClass::class);
 
         $event = new MessageResultEvent($message, $envelope, $result);

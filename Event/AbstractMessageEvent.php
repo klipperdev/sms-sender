@@ -11,7 +11,7 @@
 
 namespace Klipper\Component\SmsSender\Event;
 
-use Klipper\Component\SmsSender\SmsEnvelope;
+use Klipper\Component\SmsSender\Envelope;
 use Symfony\Component\Mime\RawMessage;
 use Symfony\Contracts\EventDispatcher\Event;
 
@@ -26,17 +26,17 @@ abstract class AbstractMessageEvent extends Event
     private $message;
 
     /**
-     * @var SmsEnvelope
+     * @var Envelope
      */
     private $envelope;
 
     /**
      * Constructor.
      *
-     * @param RawMessage  $message  The message
-     * @param SmsEnvelope $envelope The envelope
+     * @param RawMessage $message  The message
+     * @param Envelope   $envelope The envelope
      */
-    public function __construct(RawMessage $message, SmsEnvelope $envelope)
+    public function __construct(RawMessage $message, Envelope $envelope)
     {
         $this->message = $message;
         $this->envelope = $envelope;
@@ -63,7 +63,7 @@ abstract class AbstractMessageEvent extends Event
     /**
      * Get the envelope.
      */
-    public function getEnvelope(): SmsEnvelope
+    public function getEnvelope(): Envelope
     {
         return $this->envelope;
     }
@@ -71,9 +71,9 @@ abstract class AbstractMessageEvent extends Event
     /**
      * Set the envelope.
      *
-     * @param SmsEnvelope $envelope The envelope
+     * @param Envelope $envelope The envelope
      */
-    public function setEnvelope(SmsEnvelope $envelope): void
+    public function setEnvelope(Envelope $envelope): void
     {
         $this->envelope = $envelope;
     }

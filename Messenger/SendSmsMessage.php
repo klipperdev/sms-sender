@@ -11,7 +11,7 @@
 
 namespace Klipper\Component\SmsSender\Messenger;
 
-use Klipper\Component\SmsSender\SmsEnvelope;
+use Klipper\Component\SmsSender\Envelope;
 use Symfony\Component\Mime\RawMessage;
 
 /**
@@ -27,17 +27,17 @@ class SendSmsMessage
     private $message;
 
     /**
-     * @var null|SmsEnvelope
+     * @var null|Envelope
      */
     private $envelope;
 
     /**
      * Constructor.
      *
-     * @param RawMessage       $message  The message
-     * @param null|SmsEnvelope $envelope The envelope
+     * @param RawMessage    $message  The message
+     * @param null|Envelope $envelope The envelope
      */
-    public function __construct(RawMessage $message, SmsEnvelope $envelope = null)
+    public function __construct(RawMessage $message, Envelope $envelope = null)
     {
         $this->message = $message;
         $this->envelope = $envelope;
@@ -54,7 +54,7 @@ class SendSmsMessage
     /**
      * Get the envelope.
      */
-    public function getEnvelope(): ?SmsEnvelope
+    public function getEnvelope(): ?Envelope
     {
         return $this->envelope;
     }

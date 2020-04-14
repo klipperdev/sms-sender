@@ -11,9 +11,9 @@
 
 namespace Klipper\Component\SmsSender\Tests\Messenger;
 
+use Klipper\Component\SmsSender\Envelope;
 use Klipper\Component\SmsSender\Messenger\SendSmsMessage;
 use Klipper\Component\SmsSender\Mime\Phone;
-use Klipper\Component\SmsSender\SmsEnvelope;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mime\RawMessage;
 
@@ -27,7 +27,7 @@ final class SendSmsMessageTest extends TestCase
     public function testGetters(): void
     {
         $message = new RawMessage('');
-        $envelope = new SmsEnvelope(new Phone('+100'), [new Phone('+2000')]);
+        $envelope = new Envelope(new Phone('+100'), [new Phone('+2000')]);
 
         $sentMessage = new SendSmsMessage($message, $envelope);
 

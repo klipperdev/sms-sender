@@ -11,8 +11,8 @@
 
 namespace Klipper\Component\SmsSender\Tests;
 
+use Klipper\Component\SmsSender\Envelope;
 use Klipper\Component\SmsSender\SentMessage;
-use Klipper\Component\SmsSender\SmsEnvelope;
 use Klipper\Component\SmsSender\Transport\Result;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mime\Message;
@@ -29,8 +29,8 @@ final class SentMessageTest extends TestCase
     {
         $message = new RawMessage('CONTENT');
 
-        /** @var SmsEnvelope $envelope */
-        $envelope = $this->getMockBuilder(SmsEnvelope::class)->disableOriginalConstructor()->getMock();
+        /** @var Envelope $envelope */
+        $envelope = $this->getMockBuilder(Envelope::class)->disableOriginalConstructor()->getMock();
 
         /** @var Result $result */
         $result = $this->getMockBuilder(Result::class)->disableOriginalConstructor()->getMock();
@@ -54,8 +54,8 @@ final class SentMessageTest extends TestCase
     {
         $message = new Message();
 
-        /** @var SmsEnvelope $envelope */
-        $envelope = $this->getMockBuilder(SmsEnvelope::class)->disableOriginalConstructor()->getMock();
+        /** @var Envelope $envelope */
+        $envelope = $this->getMockBuilder(Envelope::class)->disableOriginalConstructor()->getMock();
 
         /** @var Result $result */
         $result = $this->getMockBuilder(Result::class)->disableOriginalConstructor()->getMock();

@@ -11,12 +11,12 @@
 
 namespace Klipper\Component\SmsSender\Transport;
 
-use Klipper\Component\SmsSender\DelayedSmsEnvelope;
+use Klipper\Component\SmsSender\DelayedEnvelope;
+use Klipper\Component\SmsSender\Envelope;
 use Klipper\Component\SmsSender\Event\MessageEvent;
 use Klipper\Component\SmsSender\Event\MessageResultEvent;
 use Klipper\Component\SmsSender\Exception\TransportException;
 use Klipper\Component\SmsSender\SentMessage;
-use Klipper\Component\SmsSender\SmsEnvelope;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -83,7 +83,7 @@ abstract class AbstractTransport implements TransportInterface
     /**
      * {@inheritdoc}
      */
-    public function send(RawMessage $message, SmsEnvelope $envelope = null): ?SentMessage
+    public function send(RawMessage $message, Envelope $envelope = null): ?SentMessage
     {
         $message = clone $message;
         $sentMessage = null;
@@ -93,7 +93,7 @@ abstract class AbstractTransport implements TransportInterface
         } else {
             try {
                 /** @var Message $message */
-                $envelope = new DelayedSmsEnvelope($message);
+                $envelope = new DelayedEnvelope($message);
             } catch (\Exception $e) {
                 throw new TransportException('Cannot send message without a valid envelope.', 0, $e);
             }

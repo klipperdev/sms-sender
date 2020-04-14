@@ -50,7 +50,7 @@ class SmsSender implements SmsSenderInterface
     /**
      * {@inheritdoc}
      */
-    public function send(RawMessage $message, SmsEnvelope $envelope = null): void
+    public function send(RawMessage $message, Envelope $envelope = null): void
     {
         if ($message instanceof Message && $this->hasRequiredFrom() && !$message->getHeaders()->has('From')) {
             throw new TransportException('The transport required the "From" information');

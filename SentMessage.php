@@ -33,7 +33,7 @@ class SentMessage
     private $raw;
 
     /**
-     * @var SmsEnvelope
+     * @var Envelope
      */
     private $envelope;
 
@@ -45,11 +45,11 @@ class SentMessage
     /**
      * Constructor.
      *
-     * @param RawMessage  $message  The message
-     * @param SmsEnvelope $envelope The envelope
-     * @param Result      $result   The result wrapper for transport
+     * @param RawMessage $message  The message
+     * @param Envelope   $envelope The envelope
+     * @param Result     $result   The result wrapper for transport
      */
-    public function __construct(RawMessage $message, SmsEnvelope $envelope, Result $result)
+    public function __construct(RawMessage $message, Envelope $envelope, Result $result)
     {
         $this->raw = $message instanceof Message ? new RawMessage($message->toIterable()) : $message;
         $this->original = $message;
@@ -76,7 +76,7 @@ class SentMessage
     /**
      * Get the envelope.
      */
-    public function getEnvelope(): SmsEnvelope
+    public function getEnvelope(): Envelope
     {
         return $this->envelope;
     }

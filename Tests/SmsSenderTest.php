@@ -11,14 +11,14 @@
 
 namespace Klipper\Component\SmsSender\Tests;
 
+use Klipper\Component\SmsSender\Envelope;
 use Klipper\Component\SmsSender\Exception\TransportException;
 use Klipper\Component\SmsSender\Mime\Phone;
-use Klipper\Component\SmsSender\SmsEnvelope;
 use Klipper\Component\SmsSender\SmsSender;
 use Klipper\Component\SmsSender\Transport\TransportInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\Envelope as MessengerEnvelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Mime\Message;
 use Symfony\Component\Mime\RawMessage;
@@ -33,7 +33,7 @@ final class SmsSenderTest extends TestCase
     public function testSend(): void
     {
         $message = new RawMessage('');
-        $envelope = new SmsEnvelope(new Phone('+100'), [new Phone('+2000')]);
+        $envelope = new Envelope(new Phone('+100'), [new Phone('+2000')]);
 
         /** @var MockObject|TransportInterface $transport */
         $transport = $this->getMockBuilder(TransportInterface::class)->getMock();
@@ -50,7 +50,7 @@ final class SmsSenderTest extends TestCase
     public function testSendWithBusMessenger(): void
     {
         $message = new RawMessage('');
-        $envelope = new SmsEnvelope(new Phone('+100'), [new Phone('+2000')]);
+        $envelope = new Envelope(new Phone('+100'), [new Phone('+2000')]);
 
         /** @var MockObject|TransportInterface $transport */
         $transport = $this->getMockBuilder(TransportInterface::class)->getMock();
@@ -61,7 +61,7 @@ final class SmsSenderTest extends TestCase
         $bus->expects(static::once())
             ->method('dispatch')
             ->willReturnCallback(static function ($message, $stamp = []) use (&$busEnvelope) {
-                $busEnvelope = new Envelope($message, $stamp);
+                $busEnvelope = new MessengerEnvelope($message, $stamp);
 
                 return $busEnvelope;
             })
@@ -70,7 +70,7 @@ final class SmsSenderTest extends TestCase
         $sender = new SmsSender($transport, $bus);
         $sender->send($message, $envelope);
 
-        static::assertInstanceOf(Envelope::class, $busEnvelope);
+        static::assertInstanceOf(MessengerEnvelope::class, $busEnvelope);
     }
 
     public function testHasRequiredFrom(): void
@@ -90,7 +90,7 @@ final class SmsSenderTest extends TestCase
         $this->expectExceptionMessage('The transport required the "From" information');
 
         $message = new Message();
-        $envelope = new SmsEnvelope(new Phone('+100'), [new Phone('+2000')]);
+        $envelope = new Envelope(new Phone('+100'), [new Phone('+2000')]);
 
         /** @var MockObject|TransportInterface $transport */
         $transport = $this->getMockBuilder(TransportInterface::class)->getMock();

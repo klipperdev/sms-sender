@@ -11,10 +11,10 @@
 
 namespace Klipper\Component\SmsSender\Tests\Messenger;
 
+use Klipper\Component\SmsSender\Envelope;
 use Klipper\Component\SmsSender\Messenger\MessageHandler;
 use Klipper\Component\SmsSender\Messenger\SendSmsMessage;
 use Klipper\Component\SmsSender\Mime\Phone;
-use Klipper\Component\SmsSender\SmsEnvelope;
 use Klipper\Component\SmsSender\Transport\TransportInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -30,7 +30,7 @@ final class MessageHandlerTest extends TestCase
     public function testInvoke(): void
     {
         $message = new RawMessage('');
-        $envelope = new SmsEnvelope(new Phone('+100'), [new Phone('+2000')]);
+        $envelope = new Envelope(new Phone('+100'), [new Phone('+2000')]);
         $sendMessage = new SendSmsMessage($message, $envelope);
 
         /** @var MockObject|TransportInterface $transport */

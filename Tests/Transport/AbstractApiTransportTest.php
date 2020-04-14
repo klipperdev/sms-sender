@@ -11,11 +11,11 @@
 
 namespace Klipper\Component\SmsSender\Tests\Transport;
 
+use Klipper\Component\SmsSender\Envelope;
 use Klipper\Component\SmsSender\Exception\TransportException;
 use Klipper\Component\SmsSender\Exception\TransportResultException;
 use Klipper\Component\SmsSender\Mime\Phone;
 use Klipper\Component\SmsSender\Mime\Sms;
-use Klipper\Component\SmsSender\SmsEnvelope;
 use Klipper\Component\SmsSender\Transport\AbstractApiTransport;
 use Klipper\Component\SmsSender\Transport\ErrorResult;
 use Klipper\Component\SmsSender\Transport\Result;
@@ -75,7 +75,7 @@ final class AbstractApiTransportTest extends TestCase
 
         $transport->expects(static::once())
             ->method('doSendSms')
-            ->willReturnCallback(static function (Sms $sms, SmsEnvelope $envelope, Result $result) use ($recipient): void {
+            ->willReturnCallback(static function (Sms $sms, Envelope $envelope, Result $result) use ($recipient): void {
                 $result->add(new ErrorResult($recipient, 'Error message', 'error_code'));
             })
         ;

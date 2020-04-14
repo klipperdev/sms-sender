@@ -11,10 +11,10 @@
 
 namespace Klipper\Component\SmsSender\Transport;
 
+use Klipper\Component\SmsSender\Envelope;
 use Klipper\Component\SmsSender\Exception\TransportException;
 use Klipper\Component\SmsSender\Exception\TransportExceptionInterface;
 use Klipper\Component\SmsSender\SentMessage;
-use Klipper\Component\SmsSender\SmsEnvelope;
 use Symfony\Component\Mime\RawMessage;
 
 /**
@@ -74,7 +74,7 @@ class RoundRobinTransport implements TransportInterface
     /**
      * {@inheritdoc}
      */
-    public function send(RawMessage $message, SmsEnvelope $envelope = null): ?SentMessage
+    public function send(RawMessage $message, Envelope $envelope = null): ?SentMessage
     {
         while ($transport = $this->getNextTransport()) {
             try {

@@ -11,9 +11,9 @@
 
 namespace Klipper\Component\SmsSender\Tests;
 
+use Klipper\Component\SmsSender\Envelope;
 use Klipper\Component\SmsSender\Exception\InvalidArgumentException;
 use Klipper\Component\SmsSender\Mime\Phone;
-use Klipper\Component\SmsSender\SmsEnvelope;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,7 +21,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @internal
  */
-final class SmsEnvelopeTest extends TestCase
+final class EnvelopeTest extends TestCase
 {
     public function testGettersAndSetters(): void
     {
@@ -31,7 +31,7 @@ final class SmsEnvelopeTest extends TestCase
             new Phone('+2000'),
         ];
 
-        $envelope = new SmsEnvelope($from, $recipients);
+        $envelope = new Envelope($from, $recipients);
 
         static::assertSame($from, $envelope->getFrom());
         static::assertSame($recipients, $envelope->getRecipients());
@@ -51,6 +51,6 @@ final class SmsEnvelopeTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('A recipient must be an instance of "Klipper\Component\SmsSender\Mime\Phone" (got "stdClass").');
 
-        new SmsEnvelope(new Phone('+100'), [new \stdClass()]);
+        new Envelope(new Phone('+100'), [new \stdClass()]);
     }
 }

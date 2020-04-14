@@ -11,7 +11,7 @@
 
 namespace Klipper\Component\SmsSender\Event;
 
-use Klipper\Component\SmsSender\SmsEnvelope;
+use Klipper\Component\SmsSender\Envelope;
 use Klipper\Component\SmsSender\Transport\Result;
 use Symfony\Component\Mime\RawMessage;
 
@@ -28,11 +28,11 @@ class MessageResultEvent extends AbstractMessageEvent
     /**
      * Constructor.
      *
-     * @param RawMessage  $message  The message
-     * @param SmsEnvelope $envelope The envelope
-     * @param Result      $result   The result
+     * @param RawMessage $message  The message
+     * @param Envelope   $envelope The envelope
+     * @param Result     $result   The result
      */
-    public function __construct(RawMessage $message, SmsEnvelope $envelope, Result $result)
+    public function __construct(RawMessage $message, Envelope $envelope, Result $result)
     {
         parent::__construct($message, $envelope);
 

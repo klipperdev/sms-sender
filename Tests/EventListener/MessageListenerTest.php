@@ -11,10 +11,10 @@
 
 namespace Klipper\Component\SmsSender\Tests\Event;
 
+use Klipper\Component\SmsSender\Envelope;
 use Klipper\Component\SmsSender\Event\MessageEvent;
 use Klipper\Component\SmsSender\EventListener\MessageListener;
 use Klipper\Component\SmsSender\Mime\Phone;
-use Klipper\Component\SmsSender\SmsEnvelope;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mime\BodyRendererInterface;
@@ -31,7 +31,7 @@ use Symfony\Component\Mime\RawMessage;
 final class MessageListenerTest extends TestCase
 {
     /**
-     * @var SmsEnvelope
+     * @var Envelope
      */
     private $envelope;
 
@@ -42,7 +42,7 @@ final class MessageListenerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->envelope = new SmsEnvelope(new Phone('+100'), [new Phone('+2000')]);
+        $this->envelope = new Envelope(new Phone('+100'), [new Phone('+2000')]);
         $this->listener = new MessageListener();
     }
 

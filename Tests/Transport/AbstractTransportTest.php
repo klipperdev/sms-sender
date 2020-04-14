@@ -11,9 +11,9 @@
 
 namespace Klipper\Component\SmsSender\Tests\Transport;
 
+use Klipper\Component\SmsSender\Envelope;
 use Klipper\Component\SmsSender\Exception\TransportException;
 use Klipper\Component\SmsSender\Mime\Phone;
-use Klipper\Component\SmsSender\SmsEnvelope;
 use Klipper\Component\SmsSender\Transport\AbstractTransport;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mime\Message;
@@ -32,7 +32,7 @@ final class AbstractTransportTest extends TestCase
     public function testSend(): void
     {
         $message = new RawMessage('');
-        $envelope = new SmsEnvelope(new Phone('+100'), [new Phone('+2000')]);
+        $envelope = new Envelope(new Phone('+100'), [new Phone('+2000')]);
 
         $transport = $this->getMockForAbstractClass(AbstractTransport::class);
         $transport->setMaxPerSecond(2 / 10);
@@ -70,7 +70,7 @@ final class AbstractTransportTest extends TestCase
     public function testSendWithEmptyRecipients(): void
     {
         $message = new RawMessage('');
-        $envelope = new SmsEnvelope(new Phone('+100'), []);
+        $envelope = new Envelope(new Phone('+100'), []);
 
         $transport = $this->getMockForAbstractClass(AbstractTransport::class);
 

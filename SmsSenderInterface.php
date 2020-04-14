@@ -24,12 +24,12 @@ interface SmsSenderInterface
     /**
      * Send the message.
      *
-     * @param RawMessage       $message  The message
-     * @param null|SmsEnvelope $envelope The envelope
+     * @param RawMessage    $message  The message
+     * @param null|Envelope $envelope The envelope
      *
      * @throws TransportExceptionInterface
      */
-    public function send(RawMessage $message, SmsEnvelope $envelope = null): void;
+    public function send(RawMessage $message, Envelope $envelope = null): void;
 
     /**
      * Check if the transport has a required from phone.

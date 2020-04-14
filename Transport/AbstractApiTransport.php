@@ -11,12 +11,12 @@
 
 namespace Klipper\Component\SmsSender\Transport;
 
+use Klipper\Component\SmsSender\Envelope;
 use Klipper\Component\SmsSender\Exception\InvalidArgumentException;
 use Klipper\Component\SmsSender\Exception\TransportException;
 use Klipper\Component\SmsSender\Exception\TransportResultException;
 use Klipper\Component\SmsSender\Mime\Sms;
 use Klipper\Component\SmsSender\SentMessage;
-use Klipper\Component\SmsSender\SmsEnvelope;
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -75,11 +75,11 @@ abstract class AbstractApiTransport extends AbstractTransport
     /**
      * Action to send the SMS.
      *
-     * @param Sms         $sms      The SMS message
-     * @param SmsEnvelope $envelope The SMS envelope
-     * @param Result      $result   The result wrapper
+     * @param Sms      $sms      The SMS message
+     * @param Envelope $envelope The SMS envelope
+     * @param Result   $result   The result wrapper
      *
      * @throws
      */
-    abstract protected function doSendSms(Sms $sms, SmsEnvelope $envelope, Result $result): void;
+    abstract protected function doSendSms(Sms $sms, Envelope $envelope, Result $result): void;
 }
