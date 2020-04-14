@@ -39,7 +39,7 @@ class SmsEnvelope
      */
     public function __construct(Phone $from, array $recipients)
     {
-        $this->setFrom($from);
+        $this->from = $from;
         $this->setRecipients($recipients);
     }
 

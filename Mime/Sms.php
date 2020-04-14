@@ -11,6 +11,7 @@
 
 namespace Klipper\Component\SmsSender\Mime;
 
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Header\HeaderInterface;
 use Symfony\Component\Mime\Header\MailboxListHeader;
 use Symfony\Component\Mime\Message;
@@ -23,6 +24,11 @@ use Symfony\Component\Mime\Part\TextPart;
  */
 class Sms extends Message
 {
+    /**
+     * @var Phone[]
+     */
+    private array $cachePhones = [];
+
     /**
      * Add the from phone.
      *
@@ -130,7 +136,7 @@ class Sms extends Message
             return $this->setListPhoneHeaderBody($name, $phones);
         }
 
-        $to->addAddresses(Phone::createArray($phones));
+        $to->addAddresses(Phone::createAddressArray($this->setCachePhones($phones)));
 
         return $this;
     }
@@ -145,14 +151,14 @@ class Sms extends Message
      */
     private function setListPhoneHeaderBody(string $name, array $phones): self
     {
-        $phones = Phone::createArray($phones);
+        $phoneAddresses = Phone::createAddressArray($this->setCachePhones($phones));
         $headers = $this->getHeaders();
 
         /** @var null|MailboxListHeader $to */
         if (null !== $to = $headers->get($name)) {
-            $to->setAddresses($phones);
+            $to->setAddresses($phoneAddresses);
         } else {
-            $headers->addMailboxListHeader($name, $phones);
+            $headers->addMailboxListHeader($name, $phoneAddresses);
         }
 
         return $this;
@@ -174,8 +180,8 @@ class Sms extends Message
                 && null !== ($body = $header->getBody())
                 && \count($body) > 0) {
             foreach ($body as $value) {
-                if ($value instanceof Phone) {
-                    $phones[] = $value;
+                if ($value instanceof Address && Phone::isAddressPhone($value)) {
+                    $phones[] = $this->getCachePhone(Phone::create($value));
                 }
             }
         }
@@ -193,5 +199,41 @@ class Sms extends Message
         $phones = $this->getPhonesFromListHeader($name);
 
         return \count($phones) > 0 ? $phones[0] : null;
+    }
+
+    /**
+     * Set the phone instance in cache.
+     *
+     * @param Phone|string $phone The phone instance
+     */
+    private function setCachePhone($phone): Phone
+    {
+        $phone = Phone::create($phone);
+        $this->cachePhones[$phone->getAddress()] = $phone;
+
+        return $phone;
+    }
+
+    /**
+     * Set the phone instances in cache.
+     *
+     * @param Phone[]|string[] $phones The phone instances
+     *
+     * @return Phone[]
+     */
+    private function setCachePhones(array $phones): array
+    {
+        $res = [];
+
+        foreach ($phones as $phone) {
+            $res[] = $this->setCachePhone($phone);
+        }
+
+        return $res;
+    }
+
+    private function getCachePhone(Phone $phone): Phone
+    {
+        return $this->cachePhones[$phone->getAddress()] ?? $phone;
     }
 }

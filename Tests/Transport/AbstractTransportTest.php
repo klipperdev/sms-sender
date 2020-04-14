@@ -87,8 +87,8 @@ final class AbstractTransportTest extends TestCase
     public function testSendWithoutEnvelope(): void
     {
         $message = new Message();
-        $message->getHeaders()->addMailboxListHeader('From', [new Phone('+100')]);
-        $message->getHeaders()->addMailboxListHeader('To', [new Phone('+2000')]);
+        $message->getHeaders()->addMailboxListHeader('From', [Phone::createAddress('+100')]);
+        $message->getHeaders()->addMailboxListHeader('To', [Phone::createAddress('+2000')]);
 
         $transport = $this->getMockForAbstractClass(AbstractTransport::class);
 

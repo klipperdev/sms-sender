@@ -49,6 +49,8 @@ class DelayedSmsEnvelope extends SmsEnvelope
      */
     public function __construct(RawMessage $message)
     {
+        parent::__construct(new Phone('+100'), []);
+
         if (!$message instanceof Message) {
             throw new InvalidArgumentException(sprintf(
                 'A delayed SMS envelope requires an instance of %s ("%s" given).',
@@ -121,9 +123,8 @@ class DelayedSmsEnvelope extends SmsEnvelope
 
         /** @var MailboxListHeader $header */
         foreach ($headers->all('to') as $header) {
-            /** @var Phone $phone */
             foreach ($header->getAddresses() as $phone) {
-                $recipients[] = new Phone($phone->getPhone());
+                $recipients[] = Phone::create($phone);
             }
         }
 

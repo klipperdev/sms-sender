@@ -25,7 +25,7 @@ use Symfony\Component\Mime\Encoder\IdnAddressEncoder;
  *
  * @author François Pluchino <francois.pluchino@klipper.dev>
  */
-class Phone extends Address
+final class Phone
 {
     /**
      * @var string
@@ -62,6 +62,8 @@ class Phone extends Address
             self::$phoneEncoder = PhoneNumberUtil::getInstance();
         }
 
+        $phone = str_replace('@carrier', '', $phone);
+
         try {
             self::$phoneEncoder->parse($phone);
         } catch (NumberParseException $e) {
@@ -97,17 +99,11 @@ class Phone extends Address
         return self::$phoneEncoder->format(self::$phoneEncoder->parse($this->phone), PhoneNumberFormat::E164);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAddress(): string
     {
         return $this->getEncodedPhone().'@carrier';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEncodedAddress(): string
     {
         if (null === self::$addressEncoder) {
@@ -120,12 +116,16 @@ class Phone extends Address
     /**
      * Create the phone instance.
      *
-     * @param Phone|string $phone The phone
+     * @param Address|Phone|string $phone The phone
      *
      * @return static
      */
-    public static function create($phone): Address
+    public static function create($phone): Phone
     {
+        if ($phone instanceof Address) {
+            $phone = $phone->getAddress();
+        }
+
         if ($phone instanceof self) {
             return $phone;
         }
@@ -144,7 +144,7 @@ class Phone extends Address
     /**
      * Create the phone instances.
      *
-     * @param Phone[]|string[] $phones The phones
+     * @param Address[]|Phone[]|string[] $phones The phones
      *
      * @return static[]
      */
@@ -157,5 +157,38 @@ class Phone extends Address
         }
 
         return $res;
+    }
+
+    /**
+     * Create and convert the phone instance into address instance.
+     *
+     * @param Address|Phone|string $phone The phone
+     */
+    public static function createAddress($phone): Address
+    {
+        return Address::create(static::create($phone)->getAddress());
+    }
+
+    /**
+     * Create and convert the phone instances into address instances.
+     *
+     * @param Address[]|Phone[]|string[] $phones The phones
+     *
+     * @return Address[]
+     */
+    public static function createAddressArray(array $phones): array
+    {
+        $res = [];
+
+        foreach ($phones as $phone) {
+            $res[] = static::createAddress($phone);
+        }
+
+        return $res;
+    }
+
+    public static function isAddressPhone(Address $address): bool
+    {
+        return '@carrier' === substr($address->getAddress(), -8);
     }
 }

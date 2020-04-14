@@ -19,7 +19,7 @@
         "psr/log": "^1.0.0",
         "symfony/event-dispatcher": "^4.3.0",
         "symfony/http-client-contracts": "^1.1.0",
-        "symfony/mime": "^4.3.0,<4.4.0"
+        "symfony/mime": "^4.3.0"
     },
     "require-dev": {
         "symfony/http-client": "^4.3.0",

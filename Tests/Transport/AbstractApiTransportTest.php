@@ -55,7 +55,7 @@ final class AbstractApiTransportTest extends TestCase
         $transport = $this->getMockForAbstractClass(AbstractApiTransport::class);
 
         $message = new Message();
-        $message->getHeaders()->addMailboxListHeader('To', [new Phone('+2000')]);
+        $message->getHeaders()->addMailboxListHeader('To', [Phone::createAddress('+2000')]);
 
         $transport->send($message);
     }
