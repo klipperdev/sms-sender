@@ -62,7 +62,7 @@ abstract class AbstractApiTransport extends AbstractTransport
                 throw new InvalidArgumentException(sprintf('The message must be an instance %s ("%s" given).', Sms::class, \get_class($sms)));
             }
         } catch (\Exception $e) {
-            throw new TransportException(sprintf('Unable to send message with the "%s" transport: %s', \get_class($this), $e->getMessage()), 0, $e);
+            throw new TransportException(sprintf('Unable to send message with the "%s" transport: %s', static::class, $e->getMessage()), 0, $e);
         }
 
         $this->doSendSms($sms, $message->getEnvelope(), $message->getResult());

@@ -55,7 +55,7 @@ final class Phone
     public function __construct(string $phone)
     {
         if (!class_exists(static::$encoderClass)) {
-            throw new LogicException(sprintf('The "%s" class cannot be used as it needs "%s"; try running "composer require giggsey/libphonenumber-for-php".', \get_class($this), static::$encoderClass));
+            throw new LogicException(sprintf('The "%s" class cannot be used as it needs "%s"; try running "composer require giggsey/libphonenumber-for-php".', static::class, static::$encoderClass));
         }
 
         if (null === self::$phoneEncoder) {

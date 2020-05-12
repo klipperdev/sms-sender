@@ -107,7 +107,7 @@ abstract class AbstractTransport implements TransportInterface
             return $sentMessage;
         }
 
-        $sentMessage = new SentMessage($event->getMessage(), $envelope, new Result(\get_class($this)));
+        $sentMessage = new SentMessage($event->getMessage(), $envelope, new Result(static::class));
 
         $this->doSend($sentMessage);
         $this->dispatcher->dispatch(new MessageResultEvent(
@@ -156,7 +156,7 @@ abstract class AbstractTransport implements TransportInterface
         $sleep = (1 / $this->rate) - (microtime(true) - $this->lastSent);
 
         if (0 < $sleep) {
-            $this->getLogger()->debug(sprintf('SMS transport "%s" sleeps for %.2f seconds', \get_class($this), $sleep));
+            $this->getLogger()->debug(sprintf('SMS transport "%s" sleeps for %.2f seconds', static::class, $sleep));
             usleep($sleep * 1000000);
         }
 

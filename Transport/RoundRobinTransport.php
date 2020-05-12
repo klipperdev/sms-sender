@@ -53,7 +53,7 @@ class RoundRobinTransport implements TransportInterface
     public function __construct(array $transports, int $retryPeriod = 60)
     {
         if (empty($transports)) {
-            throw new TransportException(\get_class($this).' must have at least one transport configured.');
+            throw new TransportException(static::class.' must have at least one transport configured.');
         }
 
         $this->transports = $transports;
