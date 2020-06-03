@@ -27,29 +27,15 @@ use Symfony\Component\Mime\Encoder\IdnAddressEncoder;
  */
 final class Phone
 {
-    /**
-     * @var string
-     */
-    public static $encoderClass = PhoneNumberUtil::class;
+    public static string $encoderClass = PhoneNumberUtil::class;
+
+    private static ?PhoneNumberUtil $phoneEncoder = null;
+
+    private static ?IdnAddressEncoder $addressEncoder = null;
+
+    private string $phone;
 
     /**
-     * @var PhoneNumberUtil
-     */
-    private static $phoneEncoder;
-
-    /**
-     * @var null|IdnAddressEncoder
-     */
-    private static $addressEncoder;
-
-    /**
-     * @var string
-     */
-    private $phone;
-
-    /**
-     * Constructor.
-     *
      * @param string $phone The phone
      */
     public function __construct(string $phone)

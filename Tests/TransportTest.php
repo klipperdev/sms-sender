@@ -19,6 +19,7 @@ use Klipper\Component\SmsSender\Transport\FailoverTransport;
 use Klipper\Component\SmsSender\Transport\NullTransport;
 use Klipper\Component\SmsSender\Transport\RoundRobinTransport;
 use Klipper\Component\SmsSender\Transport\TransportInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
@@ -32,17 +33,17 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 final class TransportTest extends TestCase
 {
     /**
-     * @var EventDispatcherInterface
+     * @var EventDispatcherInterface|MockObject
      */
     private $dispatcher;
 
     /**
-     * @var HttpClientInterface
+     * @var HttpClientInterface|MockObject
      */
     private $httpClient;
 
     /**
-     * @var LoggerInterface
+     * @var LoggerInterface|MockObject
      */
     private $logger;
 

@@ -21,19 +21,14 @@ use Klipper\Component\SmsSender\Mime\Phone;
  */
 class Envelope
 {
-    /**
-     * @var Phone
-     */
-    private $from;
+    private Phone $from;
 
     /**
      * @var Phone[]
      */
-    private $recipients = [];
+    private array $recipients = [];
 
     /**
-     * Constructor.
-     *
      * @param Phone   $from       The from phone
      * @param Phone[] $recipients The recipient phones
      */

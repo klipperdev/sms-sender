@@ -31,20 +31,11 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  */
 abstract class AbstractTransport implements TransportInterface
 {
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $dispatcher;
+    private EventDispatcherInterface $dispatcher;
 
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
+    private LoggerInterface $logger;
 
-    /**
-     * @var float
-     */
-    private $rate = 0.0;
+    private float $rate = 0.0;
 
     /**
      * @var float|int
@@ -52,15 +43,15 @@ abstract class AbstractTransport implements TransportInterface
     private $lastSent = 0;
 
     /**
-     * Constructor.
-     *
      * @param null|EventDispatcherInterface $dispatcher The event dispatcher
      * @param null|LoggerInterface          $logger     The logger
      */
-    public function __construct(EventDispatcherInterface $dispatcher = null, LoggerInterface $logger = null)
-    {
-        $this->dispatcher = $dispatcher ?: new EventDispatcher();
-        $this->logger = $logger ?: new NullLogger();
+    public function __construct(
+        ?EventDispatcherInterface $dispatcher = null,
+        ?LoggerInterface $logger = null
+    ) {
+        $this->dispatcher = $dispatcher ?? new EventDispatcher();
+        $this->logger = $logger ?? new NullLogger();
     }
 
     /**
@@ -80,10 +71,7 @@ abstract class AbstractTransport implements TransportInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function send(RawMessage $message, Envelope $envelope = null): ?SentMessage
+    public function send(RawMessage $message, ?Envelope $envelope = null): ?SentMessage
     {
         $message = clone $message;
         $sentMessage = null;
@@ -94,7 +82,7 @@ abstract class AbstractTransport implements TransportInterface
             try {
                 /** @var Message $message */
                 $envelope = new DelayedEnvelope($message);
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
                 throw new TransportException('Cannot send message without a valid envelope.', 0, $e);
             }
         }
@@ -121,9 +109,6 @@ abstract class AbstractTransport implements TransportInterface
         return $sentMessage;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasRequiredFrom(): bool
     {
         return true;

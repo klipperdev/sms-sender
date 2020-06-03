@@ -21,23 +21,15 @@ use Symfony\Component\Mime\RawMessage;
  */
 class SendSmsMessage
 {
-    /**
-     * @var RawMessage
-     */
-    private $message;
+    private RawMessage $message;
+
+    private ?Envelope $envelope;
 
     /**
-     * @var null|Envelope
-     */
-    private $envelope;
-
-    /**
-     * Constructor.
-     *
      * @param RawMessage    $message  The message
      * @param null|Envelope $envelope The envelope
      */
-    public function __construct(RawMessage $message, Envelope $envelope = null)
+    public function __construct(RawMessage $message, ?Envelope $envelope = null)
     {
         $this->message = $message;
         $this->envelope = $envelope;

@@ -20,39 +20,19 @@ use Klipper\Component\SmsSender\Exception\InvalidArgumentException;
  */
 final class Dsn
 {
-    /**
-     * @var string
-     */
-    private $scheme;
+    private string $scheme;
+
+    private string $host;
+
+    private ?string $user;
+
+    private ?string $password;
+
+    private ?int $port;
+
+    private array $options;
 
     /**
-     * @var string
-     */
-    private $host;
-
-    /**
-     * @var null|string
-     */
-    private $user;
-
-    /**
-     * @var null|string
-     */
-    private $password;
-
-    /**
-     * @var null|int
-     */
-    private $port;
-
-    /**
-     * @var array
-     */
-    private $options;
-
-    /**
-     * Constructor.
-     *
      * @param string      $scheme   The scheme
      * @param string      $host     The host
      * @param null|string $user     The user
@@ -60,8 +40,14 @@ final class Dsn
      * @param null|int    $port     The port
      * @param array       $options  The options
      */
-    public function __construct(string $scheme, string $host, ?string $user = null, ?string $password = null, ?int $port = null, array $options = [])
-    {
+    public function __construct(
+        string $scheme,
+        string $host,
+        ?string $user = null,
+        ?string $password = null,
+        ?int $port = null,
+        array $options = []
+    ) {
         $this->scheme = $scheme;
         $this->host = $host;
         $this->user = $user;

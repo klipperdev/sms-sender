@@ -18,14 +18,9 @@ use Klipper\Component\SmsSender\Transport\TransportInterface;
  */
 class MessageHandler
 {
-    /**
-     * @var TransportInterface
-     */
-    private $transport;
+    private TransportInterface $transport;
 
     /**
-     * Constructor.
-     *
      * @param TransportInterface $transport The SMS transport
      */
     public function __construct(TransportInterface $transport)

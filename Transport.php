@@ -41,8 +41,6 @@ class Transport
     private $factories;
 
     /**
-     * Constructor.
-     *
      * @param TransportFactoryInterface[] $factories The sms sender transport factories
      */
     public function __construct(iterable $factories)
@@ -60,9 +58,9 @@ class Transport
      */
     public static function fromDsn(
         string $dsn,
-        EventDispatcherInterface $dispatcher = null,
-        HttpClientInterface $client = null,
-        LoggerInterface $logger = null
+        ?EventDispatcherInterface $dispatcher = null,
+        ?HttpClientInterface $client = null,
+        ?LoggerInterface $logger = null
     ): TransportInterface {
         $factory = new self(self::getDefaultFactories($dispatcher, $client, $logger));
 
@@ -135,9 +133,9 @@ class Transport
      * @param null|LoggerInterface          $logger     The logger
      */
     private static function getDefaultFactories(
-        EventDispatcherInterface $dispatcher = null,
-        HttpClientInterface $client = null,
-        LoggerInterface $logger = null
+        ?EventDispatcherInterface $dispatcher = null,
+        ?HttpClientInterface $client = null,
+        ?LoggerInterface $logger = null
     ): iterable {
         $factories = [];
 

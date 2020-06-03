@@ -20,14 +20,9 @@ use Symfony\Component\Mime\RawMessage;
  */
 class MessageResultEvent extends AbstractMessageEvent
 {
-    /**
-     * @var Result
-     */
-    private $result;
+    private Result $result;
 
     /**
-     * Constructor.
-     *
      * @param RawMessage $message  The message
      * @param Envelope   $envelope The envelope
      * @param Result     $result   The result

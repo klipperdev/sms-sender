@@ -36,7 +36,7 @@ interface TransportInterface
      *
      * @throws TransportExceptionInterface
      */
-    public function send(RawMessage $message, Envelope $envelope = null): ?SentMessage;
+    public function send(RawMessage $message, ?Envelope $envelope = null): ?SentMessage;
 
     /**
      * Check if the from phone is required.

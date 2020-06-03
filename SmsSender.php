@@ -25,32 +25,21 @@ use Symfony\Component\Mime\RawMessage;
  */
 class SmsSender implements SmsSenderInterface
 {
-    /**
-     * @var TransportInterface
-     */
-    private $transport;
+    private TransportInterface $transport;
+
+    private ?MessageBusInterface $bus;
 
     /**
-     * @var null|MessageBusInterface
-     */
-    private $bus;
-
-    /**
-     * Constructor.
-     *
      * @param TransportInterface       $transport The transport
      * @param null|MessageBusInterface $bus       The message bus
      */
-    public function __construct(TransportInterface $transport, MessageBusInterface $bus = null)
+    public function __construct(TransportInterface $transport, ?MessageBusInterface $bus = null)
     {
         $this->transport = $transport;
         $this->bus = $bus;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function send(RawMessage $message, Envelope $envelope = null): void
+    public function send(RawMessage $message, ?Envelope $envelope = null): void
     {
         if ($message instanceof Message && $this->hasRequiredFrom() && !$message->getHeaders()->has('From')) {
             throw new TransportException('The transport required the "From" information');
@@ -65,9 +54,6 @@ class SmsSender implements SmsSenderInterface
         $this->bus->dispatch(new SendSmsMessage($message, $envelope));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasRequiredFrom(): bool
     {
         return $this->transport->hasRequiredFrom();

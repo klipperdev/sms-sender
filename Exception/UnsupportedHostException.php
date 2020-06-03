@@ -33,11 +33,6 @@ class UnsupportedHostException extends LogicException
         ],
     ];
 
-    /**
-     * Constructor.
-     *
-     * @param Dsn $dsn The dsn instance
-     */
     public function __construct(Dsn $dsn)
     {
         parent::__construct(static::buildMessage($dsn->getHost(), self::HOST_TO_PACKAGE_MAP));

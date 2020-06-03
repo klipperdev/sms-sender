@@ -21,12 +21,10 @@ use Klipper\Component\SmsSender\Transport\Dsn;
 class UnsupportedSchemeException extends LogicException
 {
     /**
-     * Constructor.
-     *
      * @param Dsn           $dsn       The dsn instance
      * @param null|string[] $supported The supported schemes
      */
-    public function __construct(Dsn $dsn, array $supported = null)
+    public function __construct(Dsn $dsn, ?array $supported = null)
     {
         $message = sprintf('The "%s" scheme is not supported for SMS Sender "%s".', $dsn->getScheme(), $dsn->getHost());
 

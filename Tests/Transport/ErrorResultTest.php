@@ -38,6 +38,6 @@ final class ErrorResultTest extends TestCase
         static::assertSame($message, $result->getMessage());
         static::assertSame($code, $result->getCode());
         static::assertSame($data, $result->getData());
-        static::assertSame($exception, $result->getException());
+        static::assertSame($exception, $result->getThrowable());
     }
 }

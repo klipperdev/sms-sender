@@ -24,29 +24,18 @@ use Symfony\Component\Mime\RawMessage;
  */
 class RoundRobinTransport implements TransportInterface
 {
-    /**
-     * @var \SplObjectStorage
-     */
-    private $deadTransports;
+    private \SplObjectStorage $deadTransports;
 
     /**
      * @var TransportInterface[]
      */
-    private $transports;
+    private array $transports;
+
+    private int $retryPeriod;
+
+    private int $cursor = 0;
 
     /**
-     * @var int
-     */
-    private $retryPeriod;
-
-    /**
-     * @var int
-     */
-    private $cursor = 0;
-
-    /**
-     * Constructor.
-     *
      * @param TransportInterface[] $transports  The transports
      * @param int                  $retryPeriod The retry period
      */
@@ -61,9 +50,6 @@ class RoundRobinTransport implements TransportInterface
         $this->retryPeriod = $retryPeriod;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return implode(' '.$this->getNameSymbol().' ', array_map(static function (TransportInterface $transport) {
@@ -71,9 +57,6 @@ class RoundRobinTransport implements TransportInterface
         }, $this->transports));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function send(RawMessage $message, Envelope $envelope = null): ?SentMessage
     {
         while ($transport = $this->getNextTransport()) {
@@ -87,9 +70,6 @@ class RoundRobinTransport implements TransportInterface
         throw new TransportException('All transports failed.');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasRequiredFrom(): bool
     {
         foreach ($this->transports as $transport) {

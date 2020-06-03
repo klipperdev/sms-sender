@@ -18,24 +18,19 @@ namespace Klipper\Component\SmsSender\Transport;
  */
 class Result
 {
-    /**
-     * @var string
-     */
-    private $transportClassName;
+    private string $transportClassName;
 
     /**
      * @var SuccessResult[]
      */
-    private $successes = [];
+    private array $successes = [];
 
     /**
      * @var ErrorResult[]
      */
-    private $errors = [];
+    private array $errors = [];
 
     /**
-     * Constructor.
-     *
      * @param string $transportClassName The class name of the transport
      */
     public function __construct(string $transportClassName)

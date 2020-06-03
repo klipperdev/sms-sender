@@ -20,19 +20,11 @@ use Klipper\Component\SmsSender\Mime\Phone;
  */
 abstract class AbstractResultItem
 {
-    /**
-     * @var Phone
-     */
-    protected $recipient;
+    protected Phone $recipient;
+
+    protected array $data;
 
     /**
-     * @var array
-     */
-    protected $data;
-
-    /**
-     * Constructor.
-     *
      * @param Phone $recipient The recipient
      * @param array $data      The data
      */

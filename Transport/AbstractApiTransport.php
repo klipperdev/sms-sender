@@ -28,31 +28,23 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
  */
 abstract class AbstractApiTransport extends AbstractTransport
 {
-    /**
-     * @var null|HttpClientInterface
-     */
-    protected $client;
+    protected ?HttpClientInterface $client;
 
     /**
-     * Constructor.
-     *
      * @param null|HttpClientInterface      $client     The http client
      * @param null|EventDispatcherInterface $dispatcher The event dispatcher
      * @param null|LoggerInterface          $logger     The logger
      */
     public function __construct(
-        HttpClientInterface $client = null,
-        EventDispatcherInterface $dispatcher = null,
-        LoggerInterface $logger = null
+        ?HttpClientInterface $client = null,
+        ?EventDispatcherInterface $dispatcher = null,
+        ?LoggerInterface $logger = null
     ) {
         parent::__construct($dispatcher, $logger);
 
         $this->client = $client;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function doSend(SentMessage $message): void
     {
         try {
@@ -61,7 +53,7 @@ abstract class AbstractApiTransport extends AbstractTransport
             if (!$sms instanceof Sms) {
                 throw new InvalidArgumentException(sprintf('The message must be an instance %s ("%s" given).', Sms::class, \get_class($sms)));
             }
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             throw new TransportException(sprintf('Unable to send message with the "%s" transport: %s', static::class, $e->getMessage()), 0, $e);
         }
 

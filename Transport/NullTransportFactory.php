@@ -20,9 +20,6 @@ use Klipper\Component\SmsSender\Exception\UnsupportedSchemeException;
  */
 class NullTransportFactory extends AbstractTransportFactory
 {
-    /**
-     * {@inheritdoc}
-     */
     public function create(Dsn $dsn): TransportInterface
     {
         if ('sms' === $dsn->getScheme()) {
@@ -32,9 +29,6 @@ class NullTransportFactory extends AbstractTransportFactory
         throw new UnsupportedSchemeException($dsn, ['sms']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(Dsn $dsn): bool
     {
         return 'null' === $dsn->getHost();

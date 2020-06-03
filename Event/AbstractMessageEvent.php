@@ -20,19 +20,11 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 abstract class AbstractMessageEvent extends Event
 {
-    /**
-     * @var RawMessage
-     */
-    private $message;
+    private RawMessage $message;
+
+    private Envelope $envelope;
 
     /**
-     * @var Envelope
-     */
-    private $envelope;
-
-    /**
-     * Constructor.
-     *
      * @param RawMessage $message  The message
      * @param Envelope   $envelope The envelope
      */

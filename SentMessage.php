@@ -22,29 +22,15 @@ use Symfony\Component\Mime\RawMessage;
  */
 class SentMessage
 {
-    /**
-     * @var RawMessage
-     */
-    private $original;
+    private RawMessage $original;
+
+    private RawMessage $raw;
+
+    private Envelope $envelope;
+
+    private Result $result;
 
     /**
-     * @var RawMessage
-     */
-    private $raw;
-
-    /**
-     * @var Envelope
-     */
-    private $envelope;
-
-    /**
-     * @var Result
-     */
-    private $result;
-
-    /**
-     * Constructor.
-     *
      * @param RawMessage $message  The message
      * @param Envelope   $envelope The envelope
      * @param Result     $result   The result wrapper for transport

@@ -20,18 +20,13 @@ use Klipper\Component\SmsSender\Transport\Result;
  */
 class TransportResultException extends RuntimeException implements TransportExceptionInterface
 {
-    /**
-     * @var Result
-     */
-    private $result;
+    private Result $result;
 
     /**
-     * Constructor.
-     *
      * @param Result $result The result
      * @param int    $code   The exception code
      */
-    public function __construct(Result $result, $code = 0)
+    public function __construct(Result $result, int $code = 0)
     {
         parent::__construct($this->buildMessage($result), $code);
 

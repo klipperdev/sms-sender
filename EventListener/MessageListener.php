@@ -22,19 +22,11 @@ use Symfony\Component\Mime\Message;
  */
 class MessageListener implements EventSubscriberInterface
 {
-    /**
-     * @var null|Headers
-     */
-    private $headers;
+    private ?Headers $headers;
+
+    private ?BodyRendererInterface $renderer;
 
     /**
-     * @var null|BodyRendererInterface
-     */
-    private $renderer;
-
-    /**
-     * Constructor.
-     *
      * @param null|Headers               $headers  The headers
      * @param null|BodyRendererInterface $renderer The body renderer
      */
@@ -44,9 +36,6 @@ class MessageListener implements EventSubscriberInterface
         $this->renderer = $renderer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

@@ -18,10 +18,7 @@ namespace Klipper\Component\SmsSender\Transport;
  */
 class FailoverTransport extends RoundRobinTransport
 {
-    /**
-     * @var null|TransportInterface
-     */
-    private $currentTransport;
+    private ?TransportInterface $currentTransport = null;
 
     /**
      * Get the name symbol.
@@ -31,9 +28,6 @@ class FailoverTransport extends RoundRobinTransport
         return '||';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getNextTransport(): ?TransportInterface
     {
         if (null === $this->currentTransport || $this->isTransportDead($this->currentTransport)) {

@@ -27,15 +27,9 @@ use Symfony\Component\Mime\RawMessage;
  */
 class DelayedEnvelope extends Envelope
 {
-    /**
-     * @var bool
-     */
-    private $senderSet = false;
+    private bool $senderSet = false;
 
-    /**
-     * @var bool
-     */
-    private $recipientsSet = false;
+    private bool $recipientsSet = false;
 
     /**
      * @var Message
@@ -43,8 +37,6 @@ class DelayedEnvelope extends Envelope
     private $message;
 
     /**
-     * Constructor.
-     *
      * @param Message|RawMessage $message The message
      */
     public function __construct(RawMessage $message)
@@ -62,9 +54,6 @@ class DelayedEnvelope extends Envelope
         $this->message = $message;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setFrom(Phone $from): void
     {
         parent::setFrom($from);
@@ -72,9 +61,6 @@ class DelayedEnvelope extends Envelope
         $this->senderSet = true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFrom(): Phone
     {
         if ($this->senderSet) {
@@ -88,9 +74,6 @@ class DelayedEnvelope extends Envelope
         throw new LogicException('Unable to determine the sender of the message.');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setRecipients(array $recipients): void
     {
         parent::setRecipients($recipients);
@@ -98,9 +81,6 @@ class DelayedEnvelope extends Envelope
         $this->recipientsSet = \count(parent::getRecipients()) > 0;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRecipients(): array
     {
         if ($this->recipientsSet) {

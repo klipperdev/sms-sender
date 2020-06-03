@@ -29,7 +29,7 @@ interface SmsSenderInterface
      *
      * @throws TransportExceptionInterface
      */
-    public function send(RawMessage $message, Envelope $envelope = null): void;
+    public function send(RawMessage $message, ?Envelope $envelope = null): void;
 
     /**
      * Check if the transport has a required from phone.

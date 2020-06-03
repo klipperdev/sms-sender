@@ -20,42 +20,31 @@ use Klipper\Component\SmsSender\Mime\Phone;
  */
 class ErrorResult extends AbstractResultItem
 {
-    /**
-     * @var string
-     */
-    private $message;
+    private string $message;
+
+    private string $code;
+
+    private ?\Throwable $throwable;
 
     /**
-     * @var string
-     */
-    private $code;
-
-    /**
-     * @var null|\Exception
-     */
-    private $exception;
-
-    /**
-     * Constructor.
-     *
      * @param Phone           $recipient The recipient
      * @param string          $message   The error message
      * @param string          $code      The error code
      * @param array           $data      The error data
-     * @param null|\Exception $exception The exception
+     * @param null|\Throwable $throwable The exception
      */
     public function __construct(
         Phone $recipient,
         string $message,
         string $code,
         array $data = [],
-        ?\Exception $exception = null
+        ?\Throwable $throwable = null
     ) {
         parent::__construct($recipient, $data);
 
         $this->message = $message;
         $this->code = $code;
-        $this->exception = $exception;
+        $this->throwable = $throwable;
     }
 
     /**
@@ -77,8 +66,8 @@ class ErrorResult extends AbstractResultItem
     /**
      * Get the exception.
      */
-    public function getException(): ?\Exception
+    public function getThrowable(): ?\Throwable
     {
-        return $this->exception;
+        return $this->throwable;
     }
 }
