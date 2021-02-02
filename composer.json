@@ -14,7 +14,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^7.4.0",
+        "php": "^7.4.0|^8.0.0",
         "giggsey/libphonenumber-for-php": "^8.3.0",
         "psr/log": "^1.0.0",
         "symfony/event-dispatcher": "^5.2.0",
