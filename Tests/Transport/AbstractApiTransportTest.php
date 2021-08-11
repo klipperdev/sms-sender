@@ -50,7 +50,7 @@ final class AbstractApiTransportTest extends TestCase
     public function testSendWithInvalidMessage(): void
     {
         $this->expectException(TransportException::class);
-        $this->expectExceptionMessageRegExp('/Unable to send message with the "(\w+)" transport: The message must be an instance Klipper\\\Component\\\SmsSender\\\Mime\\\Sms \("Symfony\\\Component\\\Mime\\\Message" given\)./');
+        $this->expectExceptionMessageMatches('/Unable to send message with the "(\w+)" transport: The message must be an instance Klipper\\\Component\\\SmsSender\\\Mime\\\Sms \("Symfony\\\Component\\\Mime\\\Message" given\)./');
 
         $transport = $this->getMockForAbstractClass(AbstractApiTransport::class);
 

@@ -102,15 +102,31 @@ final class FailoverTransportTest extends TestCase
 
     public function testSendOneDeadAndRecoveryWithinRetryPeriod(): void
     {
+        $sendPosTransport1 = 0;
         $transport1 = $this->createMock(TransportInterface::class);
-        $transport1->expects(static::at(0))->method('send')->will(static::throwException(new TransportException()));
-        $transport1->expects(static::at(1))->method('send');
+        $transport1->expects(static::exactly(3))
+            ->method('send')
+            ->willReturnCallback(static function () use (&$sendPosTransport1): void {
+                ++$sendPosTransport1;
 
+                if (1 === $sendPosTransport1) {
+                    throw new TransportException();
+                }
+            })
+        ;
+
+        $sendPosTransport2 = 0;
         $transport2 = $this->createMock(TransportInterface::class);
-        $transport2->expects(static::at(0))->method('send');
-        $transport2->expects(static::at(1))->method('send');
-        $transport2->expects(static::at(2))->method('send');
-        $transport2->expects(static::at(3))->method('send')->will(static::throwException(new TransportException()));
+        $transport2->expects(static::exactly(4))
+            ->method('send')
+            ->willReturnCallback(static function () use (&$sendPosTransport2): void {
+                ++$sendPosTransport2;
+
+                if (4 === $sendPosTransport2) {
+                    throw new TransportException();
+                }
+            })
+        ;
 
         $transport = new FailoverTransport([$transport1, $transport2], 6);
 
@@ -136,15 +152,31 @@ final class FailoverTransportTest extends TestCase
 
     public function testSendAllDeadWithinRetryPeriod(): void
     {
+        $sendPosTransport1 = 0;
         $transport1 = $this->createMock(TransportInterface::class);
-        $transport1->expects(static::at(0))->method('send')->will(static::throwException(new TransportException()));
-        $transport1->expects(static::once())->method('send');
+        $transport1->expects(static::exactly(1))
+            ->method('send')
+            ->willReturnCallback(static function () use (&$sendPosTransport1): void {
+                ++$sendPosTransport1;
 
+                if (1 === $sendPosTransport1) {
+                    throw new TransportException();
+                }
+            })
+        ;
+
+        $sendPosTransport2 = 0;
         $transport2 = $this->createMock(TransportInterface::class);
-        $transport2->expects(static::at(0))->method('send');
-        $transport2->expects(static::at(1))->method('send');
-        $transport2->expects(static::at(2))->method('send')->will(static::throwException(new TransportException()));
-        $transport2->expects(static::exactly(3))->method('send');
+        $transport2->expects(static::exactly(3))
+            ->method('send')
+            ->willReturnCallback(static function () use (&$sendPosTransport2): void {
+                ++$sendPosTransport2;
+
+                if (3 === $sendPosTransport2) {
+                    throw new TransportException();
+                }
+            })
+        ;
 
         $transport = new FailoverTransport([$transport1, $transport2], 40);
 
@@ -162,14 +194,31 @@ final class FailoverTransportTest extends TestCase
 
     public function testSendOneDeadButRecover(): void
     {
+        $sendPosTransport1 = 0;
         $transport1 = $this->createMock(TransportInterface::class);
-        $transport1->expects(static::at(0))->method('send')->will(static::throwException(new TransportException()));
-        $transport1->expects(static::at(1))->method('send');
+        $transport1->expects(static::exactly(2))
+            ->method('send')
+            ->willReturnCallback(static function () use (&$sendPosTransport1): void {
+                ++$sendPosTransport1;
 
+                if (1 === $sendPosTransport1) {
+                    throw new TransportException();
+                }
+            })
+        ;
+
+        $sendPosTransport2 = 0;
         $transport2 = $this->createMock(TransportInterface::class);
-        $transport2->expects(static::at(0))->method('send');
-        $transport2->expects(static::at(1))->method('send');
-        $transport2->expects(static::at(2))->method('send')->will(static::throwException(new TransportException()));
+        $transport2->expects(static::exactly(3))
+            ->method('send')
+            ->willReturnCallback(static function () use (&$sendPosTransport2): void {
+                ++$sendPosTransport2;
+
+                if (3 === $sendPosTransport2) {
+                    throw new TransportException();
+                }
+            })
+        ;
 
         $transport = new FailoverTransport([$transport1, $transport2], 1);
 
