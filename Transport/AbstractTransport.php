@@ -37,10 +37,7 @@ abstract class AbstractTransport implements TransportInterface
 
     private float $rate = 0.0;
 
-    /**
-     * @var float|int
-     */
-    private $lastSent = 0;
+    private float $lastSent = 0.0;
 
     /**
      * @param null|EventDispatcherInterface $dispatcher The event dispatcher
@@ -66,7 +63,7 @@ abstract class AbstractTransport implements TransportInterface
         }
 
         $this->rate = $rate;
-        $this->lastSent = 0;
+        $this->lastSent = 0.0;
 
         return $this;
     }
@@ -142,7 +139,7 @@ abstract class AbstractTransport implements TransportInterface
 
         if (0 < $sleep) {
             $this->getLogger()->debug(sprintf('SMS transport "%s" sleeps for %.2f seconds', static::class, $sleep));
-            usleep($sleep * 1000000);
+            usleep((int) ($sleep * 1000000));
         }
 
         $this->lastSent = microtime(true);
