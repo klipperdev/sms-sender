@@ -31,10 +31,7 @@ class DelayedEnvelope extends Envelope
 
     private bool $recipientsSet = false;
 
-    /**
-     * @var Message
-     */
-    private $message;
+    private Message $message;
 
     /**
      * @param Message|RawMessage $message The message
